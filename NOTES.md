@@ -1,0 +1,1 @@
+- When is the last responsible moment to extract the factory?
