@@ -1,13 +1,16 @@
 class PizzaService {
   orderPizza(kind?: string) {
-    return createPizza(kind)
+    const factory = new PizzaFactory()
+    return factory.createPizza(kind)
   }
 }
 
-const createPizza = (kind: string = "margheritta") => {
-  if (kind === "veggie") return new VeggiePizza()
-  if (kind === "bbq") return new BarbecuePizza()
-  return new MargherittaPizza()
+class PizzaFactory{
+  createPizza(kind: string = "margheritta"){
+    if (kind === "veggie") return new VeggiePizza()
+    if (kind === "bbq") return new BarbecuePizza()
+    return new MargherittaPizza()
+  }
 }
 
 class MargherittaPizza {
