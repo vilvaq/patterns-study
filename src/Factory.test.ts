@@ -13,51 +13,45 @@ class PizzaFactory{
   }
 }
 
-class MargherittaPizza {
+class Pizza {
   kind: string;
+  ingredients: string[];
 
+  constructor(){
+    this.kind = "UNKNOWN PIZZA";
+    this.ingredients = [];
+  }
+
+  reveal() {
+    return this.kind
+  }
+
+  checkIngredients() {
+    return this.ingredients
+  }
+}
+
+class MargherittaPizza extends Pizza{
   constructor() {
+    super()
     this.kind = "Margheritta"
-  }
-
-  reveal() {
-    return this.kind
-  }
-
-  checkIngredients() {
-    return ['mozarella', "tomato"]
+    this.ingredients = ['mozarella', "tomato"]
   }
 }
 
-class VeggiePizza {
-  kind: string;
-
+class VeggiePizza extends Pizza{
   constructor() {
+    super()
     this.kind = "Veggie"
-  }
-
-  reveal() {
-    return this.kind
-  }
-
-  checkIngredients() {
-    return ["zuccini", "onion", "tomato"]
+    this.ingredients = ["zuccini", "onion", "tomato"]
   }
 }
 
-class BarbecuePizza {
-  kind: string;
-
+class BarbecuePizza extends Pizza{
   constructor() {
+    super()
     this.kind = "BBQ"
-  }
-
-  reveal() {
-    return this.kind
-  }
-
-  checkIngredients() {
-    return ["bacon", "onion", "bbq sauce"]
+    this.ingredients = ["bacon", "onion", "bbq sauce"]
   }
 }
 
