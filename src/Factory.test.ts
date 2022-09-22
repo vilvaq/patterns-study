@@ -1,7 +1,12 @@
 class PizzaService {
+  private factory: PizzaFactory;
+  
+  constructor(pizzaFactory: PizzaFactory){
+    this.factory = pizzaFactory;
+  }
+
   orderPizza(kind?: string) {
-    const factory = new PizzaFactory()
-    return factory.createPizza(kind)
+    return this.factory.createPizza(kind)
   }
 }
 
@@ -56,21 +61,20 @@ class BarbecuePizza extends Pizza{
 }
 
 describe("Pizza Service", () => {
-  it("delivers marguerittas by default", () => {
-    const service = new PizzaService()
+  const pizzaFactory = new PizzaFactory()
+  const pizzaShop = new PizzaService(pizzaFactory)
 
-    const defaultPizza = service.orderPizza()
+  it("delivers marguerittas by default", () => {
+    const defaultPizza = pizzaShop.orderPizza()
 
     expect(defaultPizza.reveal()).toEqual("Margheritta")
     expect(defaultPizza.checkIngredients()).toEqual(["mozarella", "tomato"])
   })
 
   it("delivers pizzas of multiple types", () => {
-    const service = new PizzaService()
-
-    const margueritta = service.orderPizza("margheritta")
-    const veggie = service.orderPizza("veggie")
-    const bbq = service.orderPizza("bbq")
+    const margueritta = pizzaShop.orderPizza("margheritta")
+    const veggie = pizzaShop.orderPizza("veggie")
+    const bbq = pizzaShop.orderPizza("bbq")
 
     expect(margueritta.reveal()).toEqual("Margheritta")
     expect(margueritta.checkIngredients()).toEqual(["mozarella", "tomato"])
