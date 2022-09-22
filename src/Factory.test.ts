@@ -1,55 +1,59 @@
 class PizzaService {
-  orderPizza(kind: string = "margheritta") {
-    if(kind === "veggie") return new VeggiePizza()
-    if(kind === "bbq") return new BarbecuePizza()
-    return new MargherittaPizza()
+  orderPizza(kind?: string) {
+    return createPizza(kind)
   }
 }
 
-class MargherittaPizza{
+const createPizza = (kind: string = "margheritta") => {
+  if (kind === "veggie") return new VeggiePizza()
+  if (kind === "bbq") return new BarbecuePizza()
+  return new MargherittaPizza()
+}
+
+class MargherittaPizza {
   kind: string;
 
-  constructor(){
+  constructor() {
     this.kind = "Margheritta"
   }
 
-  reveal(){
+  reveal() {
     return this.kind
   }
 
-  checkIngredients(){
+  checkIngredients() {
     return ['mozarella', "tomato"]
   }
 }
 
-class VeggiePizza{
+class VeggiePizza {
   kind: string;
 
-  constructor(){
+  constructor() {
     this.kind = "Veggie"
   }
 
-  reveal(){
+  reveal() {
     return this.kind
   }
 
-  checkIngredients(){
+  checkIngredients() {
     return ["zuccini", "onion", "tomato"]
   }
 }
 
-class BarbecuePizza{
+class BarbecuePizza {
   kind: string;
 
-  constructor(){
+  constructor() {
     this.kind = "BBQ"
   }
 
-  reveal(){
+  reveal() {
     return this.kind
   }
 
-  checkIngredients(){
+  checkIngredients() {
     return ["bacon", "onion", "bbq sauce"]
   }
 }
