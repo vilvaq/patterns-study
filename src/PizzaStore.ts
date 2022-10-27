@@ -1,10 +1,8 @@
-import { VeggiePizza, MargherittaPizza, BarbecuePizza } from './Pizza'
+import { VeggiePizza, MargherittaPizza, BarbecuePizza, Pizza } from './Pizza'
 
 abstract class PizzaStore {
-  abstract factory: PizzaFactory;
-
   orderPizza(kind?: string) {
-    const pizza = this.factory.createPizza(kind);
+    const pizza = this.createPizza(kind);
 
     pizza.prepare();
     pizza.bake();
@@ -13,27 +11,51 @@ abstract class PizzaStore {
 
     return pizza;
   }
+
+  abstract createPizza(kind?: string): Pizza;
 }
 
-export class ValenciaPizzaStore extends PizzaStore {
-  factory: PizzaFactory;
+export interface Supplier {
+  getVeggies: () => string[]
+  getSauce: () => string
+  getCheese: () => string
+  getDough: () => string
+  getBacon: () => string
+}
 
-  constructor() {
-    super();
-    this.factory = new ValenciaPizzaFactory();
+class ValenciaSupplier implements Supplier {
+  getVeggies(){
+    return ["zuccini", "onion", "tomato"]
+  }
+
+  getSauce(){
+    return "tomato sauce"
+  }
+
+  getCheese(){
+    return "mozarella"
+  }
+
+  getDough(){
+    return "thin dough"
+  }
+
+  getBacon(){
+    return "bacon"
   }
 }
 
-interface PizzaFactory {
-  createPizza: (kind?: string) => Pizza;
-}
+export class ValenciaPizzaStore extends PizzaStore {
+  supplier: Supplier;
 
-class ValenciaPizzaFactory implements PizzaFactory {
+  constructor() {
+    super();
+    this.supplier = new ValenciaSupplier()
+  }
+
   createPizza(kind: string = "margheritta") {
-    if (kind === "veggie")
-      return new VeggiePizza();
-    if (kind === "bbq")
-      return new BarbecuePizza();
-    return new MargherittaPizza();
+    if (kind === "veggie") return new VeggiePizza(this.supplier);
+    if (kind === "bbq") return new BarbecuePizza(this.supplier);
+    return new MargherittaPizza(this.supplier);
   }
 }

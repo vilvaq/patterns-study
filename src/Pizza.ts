@@ -1,4 +1,6 @@
-abstract class Pizza {
+import { Supplier } from "./PizzaStore";
+
+export abstract class Pizza {
   kind: string;
   ingredients: string[];
 
@@ -33,25 +35,34 @@ abstract class Pizza {
 }
 
 export class MargherittaPizza extends Pizza {
-  constructor() {
+  constructor(supplier: Supplier) {
     super();
     this.kind = "Margheritta";
-    this.ingredients = ['mozarella', "tomato"];
+    this.ingredients = [
+      supplier.getDough(),
+      supplier.getCheese(),
+      supplier.getSauce()];
   }
 }
 
 export class VeggiePizza extends Pizza {
-  constructor() {
+  constructor(supplier: Supplier) {
     super();
     this.kind = "Veggie";
-    this.ingredients = ["zuccini", "onion", "tomato"];
+    this.ingredients = [
+      supplier.getDough(),
+      supplier.getCheese(),
+      ...supplier.getVeggies()];
   }
 }
 
 export class BarbecuePizza extends Pizza {
-  constructor() {
+  constructor(supplier: Supplier) {
     super();
     this.kind = "BBQ";
-    this.ingredients = ["bacon", "onion", "bbq sauce"];
+    this.ingredients = [
+      supplier.getDough(),
+      supplier.getCheese(),
+      supplier.getBacon()];
   }
 }

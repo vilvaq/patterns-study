@@ -9,7 +9,7 @@ describe("Pizza Service", () => {
     const defaultPizza = pizzaShop.orderPizza()
 
     expect(defaultPizza.reveal()).toEqual("Margheritta")
-    expect(defaultPizza.checkIngredients()).toEqual(["mozarella", "tomato"])
+    expect(defaultPizza.checkIngredients()).toEqual(["thin dough", "mozarella", "tomato sauce"])
   })
 
   it("delivers pizzas of multiple types", () => {
@@ -18,10 +18,10 @@ describe("Pizza Service", () => {
     const bbq = pizzaShop.orderPizza("bbq")
 
     expect(margueritta.reveal()).toEqual("Margheritta")
-    expect(margueritta.checkIngredients()).toEqual(["mozarella", "tomato"])
+    expect(margueritta.checkIngredients()).toEqual(["thin dough", "mozarella", "tomato sauce"])
     expect(veggie.reveal()).toEqual("Veggie")
-    expect(veggie.checkIngredients()).toEqual(["zuccini", "onion", "tomato"])
+    expect(veggie.checkIngredients()).toEqual(["thin dough", "mozarella", "zuccini", "onion", "tomato"])
     expect(bbq.reveal()).toEqual("BBQ")
-    expect(bbq.checkIngredients()).toEqual(["bacon", "onion", "bbq sauce"])
+    expect(bbq.checkIngredients()).toEqual(["thin dough", "mozarella", "bacon"])
   })
 })
