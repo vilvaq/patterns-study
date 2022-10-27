@@ -1,84 +1,9 @@
-class PizzaService {
-  private factory: PizzaFactory;
+import { ValenciaPizzaStore } from './PizzaStore';
 
-  constructor(pizzaFactory: PizzaFactory) {
-    this.factory = pizzaFactory;
-  }
-
-  orderPizza(kind?: string) {
-    return this.factory.createPizza(kind)
-  }
-}
-
-class PizzaFactory {
-  createPizza(kind: string = "margheritta") {
-    if (kind === "veggie") return new VeggiePizza()
-    if (kind === "bbq") return new BarbecuePizza()
-    return new MargherittaPizza()
-  }
-}
-
-class Pizza {
-  kind: string;
-  ingredients: string[];
-
-  constructor() {
-    this.kind = "UNKNOWN PIZZA";
-    this.ingredients = [];
-  }
-
-  prepare() {
-    console.log("preparing...")
-  }
-
-  bake() {
-    console.log("baking...")
-  }
-
-  cut() {
-    console.log("cutting...")
-  }
-
-  box() {
-    console.log("boxing...")
-  };
-
-  reveal() {
-    return this.kind
-  }
-
-  checkIngredients() {
-    return this.ingredients
-  }
-}
-
-class MargherittaPizza extends Pizza {
-  constructor() {
-    super()
-    this.kind = "Margheritta"
-    this.ingredients = ['mozarella', "tomato"]
-  }
-}
-
-class VeggiePizza extends Pizza {
-  constructor() {
-    super()
-    this.kind = "Veggie"
-    this.ingredients = ["zuccini", "onion", "tomato"]
-  }
-}
-
-class BarbecuePizza extends Pizza {
-  constructor() {
-    super()
-    this.kind = "BBQ"
-    this.ingredients = ["bacon", "onion", "bbq sauce"]
-  }
-}
+console.log = () => {}
 
 describe("Pizza Service", () => {
-  const pizzaFactory = new PizzaFactory()
-  const pizzaShop = new PizzaService(pizzaFactory)
+  const pizzaShop = new ValenciaPizzaStore()
 
   it("delivers marguerittas by default", () => {
     const defaultPizza = pizzaShop.orderPizza()
