@@ -1,7 +1,7 @@
 class PizzaService {
   private factory: PizzaFactory;
-  
-  constructor(pizzaFactory: PizzaFactory){
+
+  constructor(pizzaFactory: PizzaFactory) {
     this.factory = pizzaFactory;
   }
 
@@ -10,8 +10,8 @@ class PizzaService {
   }
 }
 
-class PizzaFactory{
-  createPizza(kind: string = "margheritta"){
+class PizzaFactory {
+  createPizza(kind: string = "margheritta") {
     if (kind === "veggie") return new VeggiePizza()
     if (kind === "bbq") return new BarbecuePizza()
     return new MargherittaPizza()
@@ -22,10 +22,26 @@ class Pizza {
   kind: string;
   ingredients: string[];
 
-  constructor(){
+  constructor() {
     this.kind = "UNKNOWN PIZZA";
     this.ingredients = [];
   }
+
+  prepare() {
+    console.log("preparing...")
+  }
+
+  bake() {
+    console.log("baking...")
+  }
+
+  cut() {
+    console.log("cutting...")
+  }
+
+  box() {
+    console.log("boxing...")
+  };
 
   reveal() {
     return this.kind
@@ -36,7 +52,7 @@ class Pizza {
   }
 }
 
-class MargherittaPizza extends Pizza{
+class MargherittaPizza extends Pizza {
   constructor() {
     super()
     this.kind = "Margheritta"
@@ -44,7 +60,7 @@ class MargherittaPizza extends Pizza{
   }
 }
 
-class VeggiePizza extends Pizza{
+class VeggiePizza extends Pizza {
   constructor() {
     super()
     this.kind = "Veggie"
@@ -52,7 +68,7 @@ class VeggiePizza extends Pizza{
   }
 }
 
-class BarbecuePizza extends Pizza{
+class BarbecuePizza extends Pizza {
   constructor() {
     super()
     this.kind = "BBQ"
